@@ -24,12 +24,16 @@
 
 <style>
   :root{
-    --cream:#FBF4E6;
-    --cream-deep:#F3E7D2;
-    --brick:#A32C22;
-    --ember:#C8512A;
-    --cocoa:#5E3A22;
-    --ink:#4A2E1C;
+    --bg:#F4FAFC;            /* fondo, casi blanco */
+    --white:#FFFFFF;
+    --white-bg:rgba(255,255,255,0.8);
+    --blue:#1E93CE;          /* acciones */
+    --blue-deep:#0E5C86;     /* títulos */
+    --blue-soft:#DCEEF8;
+    --line:#DDEAF2;
+    --ink:#2F5668;           /* texto */
+    --magenta:#E34B8F;       /* acento */
+    --orange:#F2913A;        /* acento */
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -37,7 +41,7 @@
   html{scroll-behavior:auto}
   html.abierta{scroll-snap-type:y mandatory}
   body{
-    background:var(--cream);
+    background:var(--bg);
     color:var(--ink);
     font-family:'Karla',system-ui,sans-serif;
     font-size:17px;line-height:1.7;
@@ -74,7 +78,7 @@
   /* ── portada ───────────────────────────────────── */
   #cover{
     position:fixed;inset:0;z-index:3;
-    background:var(--cream);
+    background:var(--bg);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:28px 22px;
     transition:opacity .9s ease;
@@ -91,7 +95,7 @@
   #fold.away{opacity:0}
   #fold .sheet{
     position:absolute;inset:0;
-    background:linear-gradient(to top,var(--cream-deep),var(--cream) 42%);
+    background:linear-gradient(to top,#1580B8,var(--blue) 55%);
     transform-origin:bottom center;
     transform:rotateX(-84deg);
     transition:transform 1.15s cubic-bezier(.3,.72,.3,1);
@@ -101,7 +105,7 @@
   #fold.up .sheet{transform:rotateX(0deg)}
   #fold .sheet::after{
     content:"";position:absolute;left:8%;right:8%;bottom:0;height:1px;
-    background:linear-gradient(to right,transparent,#DCC8A6,transparent);
+    background:linear-gradient(to right,transparent,rgba(255,255,255,.6),transparent);
   }
 
   /* ── secciones ─────────────────────────────────── */
@@ -123,18 +127,33 @@
   .sec.seen > *:nth-child(4){transition-delay:.26s}
   .sec.seen > *:nth-child(5){transition-delay:.34s}
 
+  /* ── tarjeta blanca de cada sección ────────────── */
+  .card{
+    width:100%;max-width:560px;
+    background:var(--white-bg);
+    border-radius:26px;
+    border:1px solid #E8F2F8;
+    padding:clamp(30px,6vw,48px) clamp(22px,5vw,38px);
+    box-shadow:0 14px 38px rgba(21,90,130,.10);
+  }
+
+  /* ── portada sobre turquesa ────────────────────── */
+  #cover .script{color:var(--blue-deep)}
+  #cover .over{color:var(--blue)}
+  #cover p.body{color:var(--ink)}
+
   /* ── tipografía ────────────────────────────────── */
   .script{
-    font-family:'Petit Formal Script',cursive;color:var(--cocoa);
+    font-family:'Petit Formal Script',cursive;color:var(--blue-deep);
     font-size:clamp(34px,8.5vw,52px);line-height:1.25;font-weight:400;
   }
   .script.sm{font-size:clamp(27px,6.5vw,38px)}
   .over{
     font-family:'Petit Formal Script',cursive;
-    font-size:clamp(19px,4.5vw,22px);color:var(--ember);margin-bottom:6px;
+    font-size:clamp(19px,4.5vw,22px);color:var(--blue);margin-bottom:6px;
   }
-  p.body{max-width:42ch;margin:16px auto 0;color:#6A4730}
-  hr.rule{width:52px;height:1px;background:#D9C6A6;margin:22px auto;border:0}
+  p.body{max-width:42ch;margin:16px auto 0;color:var(--ink)}
+  hr.rule{width:46px;height:3px;border-radius:3px;background:var(--blue);margin:22px auto;border:0}
 
   /* ── corazón de hojas ──────────────────────────── */
   .heart{
@@ -159,39 +178,39 @@
   .frame{
     width:148px;aspect-ratio:4/5;
     max-height:30vh;
-    background:var(--cream-deep);
-    border:1px solid #E3D2B4;border-radius:2px;
+    background:var(--blue-soft);
+    border:1px solid var(--line);border-radius:10px;
     overflow:hidden;
     display:flex;align-items:center;justify-content:center;
     transform:rotate(var(--tilt));
   }
   .shots.one .frame{width:min(268px,70vw);max-height:42vh}
   .frame img{width:100%;height:100%;object-fit:cover;display:block}
-  .frame .miss{font-size:12.5px;color:#AE9370;padding:0 14px;line-height:1.55}
-  .frame .miss b{font-weight:500;color:#8C7351}
+  .frame .miss{font-size:12.5px;color:#7FA0B5;padding:0 14px;line-height:1.55}
+  .frame .miss b{font-weight:500;color:var(--blue-deep)}
   .shot .cap{
     font-family:'Petit Formal Script',cursive;
-    font-size:17px;color:var(--cocoa);margin-top:9px;display:block;
+    font-size:17px;color:var(--blue-deep);margin-top:9px;display:block;
   }
 
   /* ── controles ─────────────────────────────────── */
   .btn{
     display:inline-flex;align-items:center;gap:9px;margin-top:30px;
-    padding:13px 28px;background:var(--brick);color:var(--cream);
+    padding:13px 28px;background:var(--blue);color:var(--white);
     border:0;border-radius:999px;
     font-family:'Karla',sans-serif;font-size:16px;cursor:pointer;
     transition:background .25s ease,transform .25s ease;
   }
-  .btn:hover{background:#8C231A;transform:translateY(-2px)}
+  .btn:hover{background:#1580B8;transform:translateY(-2px)}
   .btn.ghost{
-    background:none;color:var(--cocoa);border:1px solid #DCC8A6;
+    background:none;color:var(--blue-deep);border:1px solid var(--line);
     padding:11px 22px;font-size:15px;
   }
-  .btn.ghost:hover{background:var(--cream-deep);color:var(--brick)}
+  .btn.ghost:hover{background:var(--blue-soft);color:var(--blue)}
 
   .hint{
     position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
-    color:#B39A76;font-size:14px;
+    color:#8AA9B8;font-size:14px;
     display:flex;flex-direction:column;align-items:center;gap:5px;
     transition:opacity .6s ease;
   }
@@ -202,8 +221,8 @@
   .aviso{
     position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
     z-index:5;max-width:88vw;
-    background:var(--cream-deep);border:1px solid #E3D2B4;border-radius:4px;
-    padding:10px 16px;font-size:13.5px;color:#8C7351;
+    background:var(--white);border:1px solid var(--line);border-radius:8px;
+    padding:10px 16px;font-size:13.5px;color:var(--ink);
     transition:opacity .5s ease;
   }
   .aviso.off{opacity:0}
@@ -211,18 +230,18 @@
   .sound{
     position:fixed;top:18px;right:18px;z-index:4;
     width:42px;height:42px;border-radius:50%;
-    background:var(--cream-deep);border:1px solid #E3D2B4;
+    background:var(--white);border:1px solid var(--line);
     display:none;align-items:center;justify-content:center;
-    cursor:pointer;color:var(--cocoa);
+    cursor:pointer;color:var(--blue-deep);
     transition:color .2s ease,border-color .2s ease;
   }
   .sound.show{display:flex}
-  .sound:hover{color:var(--brick);border-color:#D9B98C}
+  .sound:hover{color:var(--blue);border-color:var(--blue)}
   .sound .off{display:none}
   .sound.muted .on{display:none}
   .sound.muted .off{display:block}
 
-  :focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 
   @media (max-width:420px){ .frame{width:132px} }
 
@@ -317,7 +336,7 @@ const CONFIG = {
       encima: "Lo que quiero decirte",
       titulo: "Te amo sin condiciones",
       texto: [
-        "Como tu novio y como tu amigo: para celebrarte cuando todo salga bien, para acompañarte cuando no salga nada y admirarte cuando brillas en el escenario",
+        "Como tu novio y como tu amigo: para celebrarte cuando todo salga bien, para acompañarte cuando no salga nada y admirarte cuando brillas en el escenario.",
         "No tienes que estar fuerte, ni de buen ánimo, ni tenerlo todo resuelto. Te quiero y te amo igual, tal como eres, y aquí voy a seguir."
       ]
     }
@@ -332,25 +351,25 @@ const CONFIG = {
 /* ═══════════════════════════════════════════════════
    Hojas (SVG)
    ═══════════════════════════════════════════════════ */
-const PALETA = ["#A32C22","#C0442C","#C8512A","#E29434","#EFBA5E","#8A3A1C"];
-const CREMA  = "#FBF4E6";
+const PALETA = ["#1E93CE","#4FB3E0","#0E5C86","#2AA7C9","#7FCCEA","#E34B8F"];
+const VETA   = "#FFFFFF";
 
 function hoja(tipo, color){
   const v = c => `<svg viewBox="0 0 40 40" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">${c}</svg>`;
   switch(tipo){
     case "simple": return v(`
       <path d="M20 3C10 11 8 25 20 37C32 25 30 11 20 3Z" fill="${color}"/>
-      <path d="M20 7V33M20 14l-5 3M20 14l5 3M20 21l-6 3M20 21l6 3" stroke="${CREMA}" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".85"/>`);
+      <path d="M20 7V33M20 14l-5 3M20 14l5 3M20 21l-6 3M20 21l6 3" stroke="${VETA}" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".85"/>`);
     case "larga": return v(`
       <path d="M20 2C13 12 12 27 20 38C28 27 27 12 20 2Z" fill="${color}"/>
-      <path d="M20 5V35" stroke="${CREMA}" stroke-width="1" opacity=".8"/>
-      <path d="M20 11l-4 4M20 11l4 4M20 19l-4.5 4M20 19l4.5 4M20 27l-4 3M20 27l4 3" stroke="${CREMA}" stroke-width="1" stroke-linecap="round" opacity=".7" fill="none"/>`);
+      <path d="M20 5V35" stroke="${VETA}" stroke-width="1" opacity=".8"/>
+      <path d="M20 11l-4 4M20 11l4 4M20 19l-4.5 4M20 19l4.5 4M20 27l-4 3M20 27l4 3" stroke="${VETA}" stroke-width="1" stroke-linecap="round" opacity=".7" fill="none"/>`);
     case "roble": return v(`
       <path d="M20 2c3 1 4 3 5 5 3-1 5 1 4 4 3 1 4 4 1 6 3 2 2 5-1 6 2 3 0 6-3 6 0 4-3 5-6 3-3 2-6 1-6-3-3 0-5-3-3-6-3-1-4-4-1-6-3-2-2-5 1-6-1-3 1-5 4-4 1-2 2-4 5-5Z" fill="${color}"/>
-      <path d="M20 6v28" stroke="${CREMA}" stroke-width="1.1" opacity=".75"/>`);
+      <path d="M20 6v28" stroke="${VETA}" stroke-width="1.1" opacity=".75"/>`);
     case "maple": return v(`
       <path d="M20 2l3.5 9.5L30 8l-1.5 7.5L37 14l-6.5 6L35 25l-7.5-.5.8 6.5L21.5 28 20 38l-1.5-10-6.8 3L12.5 24.5 5 25l4.5-5L3 14l8.5 1.5L10 8l6.5 3.5L20 2Z" fill="${color}"/>
-      <path d="M20 12v20" stroke="${CREMA}" stroke-width="1" opacity=".7"/>`);
+      <path d="M20 12v20" stroke="${VETA}" stroke-width="1" opacity=".7"/>`);
     case "rama": return v(`
       <path d="M20 38C20 26 20 12 20 3" stroke="${color}" stroke-width="1.6" stroke-linecap="round" fill="none"/>
       <g fill="${color}">
@@ -361,11 +380,11 @@ function hoja(tipo, color){
         <ellipse cx="20" cy="6" rx="3" ry="4"/>
       </g>`);
     case "bellota": return v(`
-      <path d="M20 14c5 0 8 4 8 9s-4 12-8 12-8-7-8-12 3-9 8-9Z" fill="#D98A33"/>
-      <path d="M11 13c0-3 4-5 9-5s9 2 9 5-4 4-9 4-9-1-9-4Z" fill="#6B4020"/>
-      <path d="M20 8V4" stroke="#6B4020" stroke-width="1.8" stroke-linecap="round"/>`);
+      <path d="M20 14c5 0 8 4 8 9s-4 12-8 12-8-7-8-12 3-9 8-9Z" fill="#4FB3E0"/>
+      <path d="M11 13c0-3 4-5 9-5s9 2 9 5-4 4-9 4-9-1-9-4Z" fill="#0E5C86"/>
+      <path d="M20 8V4" stroke="#0E5C86" stroke-width="1.8" stroke-linecap="round"/>`);
     case "moras": return v(`
-      <path d="M20 4c-2 8-4 14-8 20" stroke="#8A3A1C" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M20 4c-2 8-4 14-8 20" stroke="#0E5C86" stroke-width="1.4" fill="none" stroke-linecap="round"/>
       <g fill="${color}">
         <circle cx="13" cy="26" r="3.4"/><circle cx="20" cy="29" r="3"/>
         <circle cx="25" cy="22" r="2.8"/><circle cx="17" cy="19" r="2.6"/>
@@ -538,12 +557,16 @@ cover.insertAdjacentHTML("beforeend",
 CONFIG.paginas.forEach((pg,i) => {
   const s = document.createElement("section");
   s.className = "sec";
-  s.innerHTML =
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML =
     `<div class="over">${pg.encima}</div>` +
     `<h2 class="script sm">${pg.titulo}</h2>` +
     `<hr class="rule">` +
     (pg.texto||[]).map(t=>`<p class="body">${t}</p>`).join("");
-  if(pg.fotos && pg.fotos.length) s.appendChild(bloqueFotos(pg.fotos));
+  if(pg.fotos && pg.fotos.length) card.appendChild(bloqueFotos(pg.fotos));
+  s.appendChild(card);
 
   if(i === 0){
     s.insertAdjacentHTML("beforeend",
@@ -558,12 +581,15 @@ CONFIG.paginas.forEach((pg,i) => {
 /* — final — */
 const fin = document.createElement("section");
 fin.className = "sec";
-fin.appendChild(corazon(true));
-fin.insertAdjacentHTML("beforeend",
+const cardFin = document.createElement("div");
+cardFin.className = "card";
+cardFin.appendChild(corazon(true));
+cardFin.insertAdjacentHTML("beforeend",
   `<div class="script">${CONFIG.final.titulo}</div>
    <p class="body">${CONFIG.final.texto}</p>
    <div class="over" style="margin-top:20px">${CONFIG.firma}</div>
    <button class="btn ghost" id="otra">Volver al principio</button>`);
+fin.appendChild(cardFin);
 carta.appendChild(fin);
 
 /* — cada sección aparece al entrar en pantalla — */
